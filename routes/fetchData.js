@@ -13,5 +13,14 @@ router.get("/:id", (req, res) => {
     res.json(data);
   });
 });
+//fetch all data
+router.get("/", (req, res) => {
+  Notes.find({}, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    res.json(data);
+  });
+});
 
 module.exports = router;
