@@ -10,17 +10,23 @@ function Details() {
     title: "",
     body: "",
   });
-
   const { id } = useParams();
 
   const getContent = async () => {
     const res = await axios.get(`http://localhost:5000/posts/${id}`);
-    setcontent(res.data[0]);
-    console.log(res.data[0]);
+    //chack if the request was successful
+    if (res.status === 200) {
+      setcontent(res.data);
+    }
+    if (res.data.status === 404) {
+      setcontent({
+        title: "No content",
+        body: "No content",
+      });
+    }
   };
   useEffect(() => {
     getContent();
-    console.log(content);
   }, []);
 
   return (
